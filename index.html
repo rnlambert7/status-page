@@ -16,7 +16,7 @@
 
         <!-- Styles -->
         <style>
-            /* Base Colors */
+            /* Base Variables */
             :root {
                 --blue: #007bff;
                 --indigo: #6610f2;
@@ -270,8 +270,13 @@
                 ]
             };
 
+            // Status Page Builder
             const statusPage = {
+
+                // Init
                 init: (config) => {
+                    // Isolated init functions in try/catches for safety.
+
                     try { statusPage.initTheme(config.themeDark); }
                     catch (e){ console.error(e); }
 
@@ -288,7 +293,10 @@
                     catch (e){ console.error(e); }
                     
                 },
+
+                // Init Links
                 initLinks: (links, destinationSelector) => {
+                    // Build links as html and insert into the destination.
                     let html = '<ul class="links">';
                     links.forEach((item) => {
                         html += '<li><a href="'+(item.href || 'MISSING_HREF')+'" title="'+(item.text || 'MISSING_TEXT')+'"><span>'+(item.text || 'MISSING_TEXT')+'</span></a></li>';
@@ -296,10 +304,15 @@
                     html += '</ul>';
                     document.querySelector(destinationSelector).innerHTML = html + document.querySelector(destinationSelector).innerHTML;
                 },
+
+                // Init Title
                 initTitle: (title) => {
                     document.querySelector('title').innerText = title;
                 },
+
+                // Init Content
                 initContent: (content) => {
+                    // Build content as html and insert into the content section.
                     let html = '';
                     content.forEach((item) => {
                         html += '<li class="main-item">';
@@ -316,11 +329,15 @@
                     });
                     document.querySelector('#content').innerHTML = html;
                 },
+
+                // Init Theme
                 initTheme: (themeDark) => {
+                    // If dark theme set, add the class.
                     if (themeDark) document.querySelector('html').classList.add('theme-dark');
                 }
             }
 
+            // Run the builder.
             try {
                 statusPage.init(configObject);
             } catch (e) {
