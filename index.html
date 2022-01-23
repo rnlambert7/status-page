@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="theme-light">
+    <head>
+        <!-- Meta -->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" ,="" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- Title -->
+        <title>Status Page</title>
+
+        <!-- Import the Lato Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"> 
+
+        <!-- Styles -->
+        <style>
+            /* Base Colors */
+            :root {
+                --blue: #007bff;
+                --indigo: #6610f2;
+                --purple: #6f42c1;
+                --pink: #e83e8c;
+                --red: #dc3545;
+                --orange: #fd7e14;
+                --yellow: #ffc107;
+                --green: #28a745;
+                --teal: #20c997;
+                --cyan: #17a2b8;
+
+                --background-color-theme-light: white;
+                --background-color-theme-dark: #333;
+                --text-color-theme-light: black;
+                --text-color-theme-dark: white;
+               
+                --navigation-background-color-theme-light: rgba(0, 0, 0, 0.15);
+                --navigation-background-color-theme-dark: rgba(255, 255, 255, 0.15);
+                --navigation-height: 3rem;
+                --navigation-border-light: inset 0 0 0 1px white;
+                --navigation-border-dark: inset 0 0 0 1px #333;
+
+                --footer-background-color-theme-light: rgba(0, 0, 0, 0.15);
+                --footer-background-color-theme-dark: rgba(255, 255, 255, 0.15);
+                --footer-border-light: inset 0 0 0 1px white;
+                --footer-border-dark: inset 0 0 0 1px #333;
+                --footer-height: 3rem;
+
+                --main-item-border-light: 0 0 0 0.0675rem rgba(0,0,0,1);
+            }
+
+            /* Base Styles */
+            html {
+                background-color:var(--background-color-theme-light);
+                color:var(--text-color-theme-light);
+                font-family: 'Lato', sans-serif;
+            }
+            body {
+                font-size:16px;
+                margin:0;
+            }
+            html.theme-dark {
+                background-color:var(--background-color-theme-dark);
+                color:var(--text-color-theme-dark);
+            }
+
+            a {
+                color:var(--text-color-theme-light);
+            }
+            .theme-dark a {
+                color:var(--text-color-theme-dark);
+            }
+
+            /* Navigation */
+            .navigation {
+               display:block;
+               width:100%;
+               background-color:var(--navigation-background-color-theme-light);
+               height:var(--navigation-height);
+               /* box-shadow:var(--navigation-border-light); */
+            }
+            .theme-dark .navigation {
+                background-color:var(--navigation-background-color-theme-dark);
+                /* box-shadow:var(--navigation-border-dark); */
+            }
+
+            /* Footer */
+            .footer {
+               display:block;
+               width:100%;
+               background-color:var(--footer-background-color-theme-light);
+               height:var(--footer-height);
+               /* box-shadow:var(--navigation-border-light); */
+            }
+            .theme-dark .footer {
+                background-color:var(--footer-background-color-theme-dark);
+                /* box-shadow:var(--navigation-border-dark); */
+            }
+
+            /* Navigation and Footer Links */
+            .navigation ul.links,
+            .footer ul.links {
+                margin:0;
+                padding:0;
+                list-style-type:none;
+                display:flex;
+                height:inherit;
+            }
+            .links li {
+                display:flex;
+                flex: 0 1 auto;
+                height:inherit;
+                cursor:pointer;
+            }
+            .links li a {
+                display:flex;
+                flex: 0 1 auto;
+                padding:0 1rem;
+                height:inherit;
+                text-decoration: none;
+                color:var(--text-color-theme-light);
+            }
+            .theme-dark .links li a {
+                color:var(--text-color-theme-dark);
+            }
+            .links li a span {
+                flex: 0 1 auto;
+                align-self:center;
+                font-size:1.25rem;
+                font-weight:600;
+            }
+            
+            /* Main */
+            .main {
+                display:flex;
+                height:calc(100vh - var(--navigation-height) - var(--footer-height));
+            }
+
+            /* Main Items */
+            .main-items {
+                list-style-type:none;
+                margin:0;
+                padding:0;
+                width:100%;
+                height:100%;
+                display:flex;
+                flex-wrap:wrap;
+                overflow-y:auto;
+            }
+            .main-item {
+                flex:1 1 auto;
+                display:flex;
+                overflow:hidden;
+                box-shadow: var(--main-item-border-light);
+                justify-content: space-evenly;
+                width:100%;
+                flex-wrap:wrap;
+                align-content:start;
+            }
+            @media (min-width:768px){
+                .main-item {
+                    width:50%;
+                }
+            }
+            @media (min-width:1500px){
+                .main-item {
+                    width:25%;
+                }
+            }
+            .main-item-header {
+                flex: 1 1 100%;
+                padding:1rem;
+                text-align: center;
+            }
+            .main-item-title {
+                margin:0;
+            }
+            .main-item-article {
+                flex: 1 1 100%;
+                padding:1rem;
+                height:100%;
+            }
+            
+        </style>
+    </head>
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navigation" id="navigation"></nav>
+
+        <!-- Main -->
+        <main class="main" id="main">
+            <ul class="main-items" id="content"></ul>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer" id="footer"></footer>
+        
+        <!-- JavaScript -->
+        <script>
+            /*
+                README
+
+                - This page builds itself. Use the configObject below to customize it.
+                - Page title, theme, navigation and footer links, all easily changable.
+                - In the content section you can pass a title for a section and HTML as content.
+                - The blocks on the page will change size to fit the maximize space using flexbox.
+                - Content blocks will take up as much room as they need.
+            */
+
+            // Config
+            const configObject = {
+                // Page Title
+                "title": "Status Dashboard",
+
+                // Boolean to enable dark theme
+                "themeDark": false,
+
+                // Array of objects containing text and href keys for navigation links.
+                "navigation": [
+                    {
+                        "text": "Home",
+                        "href": "/"
+                    },
+                    {
+                        "text": "Jira",
+                        "href": "/"
+                    },
+                    {
+                        "text": "Confluence",
+                        "href": "/"
+                    },
+                    {
+                        "text": "Bitbucket",
+                        "href": "/"
+                    }
+                ],
+
+                // Array of objects containing text and href keys for footer links.
+                "footer": [],
+
+                // Array of objects containing key/value pairs to create a content item.
+                    // "title" -> A string title for the content item.
+                    // "style" -> A string containing custom styles for the content. For example: "font-size: 20px;".
+                    // "content" -> A template string containing the HTML for the content item.
+                "content": [
+                    {
+                        "title": "Git Branches",
+                        "style": "font-size:20px;",
+                        "content": `
+                            Current release branches are:
+                            <ul>
+                                <li>
+                                    Release/1.0.x -> Production
+                                </li>
+                                <li>
+                                    Release/1.1.x -> Release 1 and Enhancements
+                                </li>
+                                <li>
+                                    Develop -> Further Releases & Enhancements
+                                </li>
+                            </ul>
+                            
+                        `
+                    },
+                    {
+                        "title": "Example Block",
+                        "content": `
+                            Hello <strong>World</strong>!
+                        `
+                    },
+                    {
+                        "title": "Red Alert!",
+                        "style": "background-color:brown; color:white; font-size:50px;",
+                        "content": `
+                            <strong>EMERGENCY EMERGENCY!</strong>
+                        `
+                    }
+                ]
+            };
+
+            const statusPage = {
+                init: (config) => {
+                    try { statusPage.initTheme(config.themeDark); }
+                    catch (e){ console.error(e); }
+
+                    try { statusPage.initLinks(config.navigation, '#navigation'); }
+                    catch (e){ console.error(e); }
+
+                    try { statusPage.initLinks(config.footer, '#footer'); }
+                    catch (e){ console.error(e); }
+
+                    try { statusPage.initTitle(config.title); }
+                    catch (e){ console.error(e); }
+
+                    try { statusPage.initContent(config.content); }
+                    catch (e){ console.error(e); }
+                    
+                },
+                initLinks: (links, destinationSelector) => {
+                    let html = '<ul class="links">';
+                    links.forEach((item) => {
+                        html += '<li><a href="'+(item.href || 'MISSING_HREF')+'" title="'+(item.text || 'MISSING_TEXT')+'"><span>'+(item.text || 'MISSING_TEXT')+'</span></a></li>';
+                    });
+                    html += '</ul>';
+                    document.querySelector(destinationSelector).innerHTML = html + document.querySelector(destinationSelector).innerHTML;
+                },
+                initTitle: (title) => {
+                    document.querySelector('title').innerText = title;
+                },
+                initContent: (content) => {
+                    let html = '';
+                    content.forEach((item) => {
+                        html += '<li class="main-item">';
+                        
+                        html += '<header class="main-item-header"><h3 class="main-item-title">';
+                        html += item.title;
+                        html += '</h3></header>';
+
+                        html += '<article class="main-item-article" '+(item.style ? 'style="'+item.style+'"' : '')+'>';
+                        html += item.content;
+                        html += '</article>';
+                        
+                        html += "</li>";
+                    });
+                    document.querySelector('#content').innerHTML = html;
+                },
+                initTheme: (themeDark) => {
+                    if (themeDark) document.querySelector('html').classList.add('theme-dark');
+                }
+            }
+
+            try {
+                statusPage.init(configObject);
+            } catch (e) {
+                console.error(e)
+            }
+            
+        </script>
+    </body>
+</html>
